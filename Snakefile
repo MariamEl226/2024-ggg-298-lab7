@@ -2,7 +2,18 @@ rule rule_1:
   input: "a.fa.gz"
   output: "a.sig.zip"
   shell: "sourmash sketch dna a.fa.gz --name 'Sulfurihydrogenibium' -o a.sig.zip"
-  
+rule sketch:
+  input: "{name}.fa.gz"
+  output: "{name}.sig.zip"
+  shell: """
+       sourmash sketch dna {input} -o {output} --name {wildcards.name}
+rule sketch:
+  input: "{name}.fa.gz"
+  output: "{name}.sig.zip"
+  shell: """
+       sourmash sketch dna {input} -o {output} --name {wildcards.name}
+   """   """
+   
 rule rule_2:
   input: "b.fa.gz"
   output: "b.sig.zip"
